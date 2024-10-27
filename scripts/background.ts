@@ -1,15 +1,21 @@
-console.log('Hello from the background script!');
-chrome.sidePanel
-  .setPanelBehavior({ openPanelOnActionClick: true })
-  .catch((error) => console.error(error));
-
-chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
-  if (!tab.url) return;
-
-  await chrome.sidePanel.setOptions({
-    tabId,
-    path: 'index.html',
+chrome.runtime.onInstalled.addListener(() => {
+  // Set options for the side panel if necessary
+  chrome.sidePanel.setOptions({
+    path: '../index.html', // This should match the path in the manifest
     enabled: true,
   });
 });
 
+// Optionally, you can set up an event listener to open the side panel on a specific action
+chrome.action.onClicked.addListener(() => {
+  chrome.sidePanel.setOptions({
+    path: '../index.html',
+    enabled: true,
+  });
+});
+
+// if (import.meta.hot) {
+//   import.meta.hot.accept(() => {
+//     chrome.runtime.reload();
+//   });
+// }

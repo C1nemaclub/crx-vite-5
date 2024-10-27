@@ -10,8 +10,7 @@
     }
   ],
   "side_panel": {
-    "default_path": "index.html",
-    "open_at_install": true
+    "default_path": "index.html"
   },
   "permissions": ["activeTab", "scripting", "sidePanel", "storage"],
 
